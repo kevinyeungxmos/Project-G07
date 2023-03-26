@@ -18,7 +18,7 @@ class SplashActivity : AppCompatActivity() {
         val login: Boolean = sharedPrefs.getBoolean("KEY_LOGIN", false)
         if (login) {
             Handler().postDelayed({
-                startActivity(Intent(this, LessonDetailsActivity::class.java))
+                startActivity(Intent(this, LessonListActivity::class.java))
                 finish()
             }, 3000)
         } else {
