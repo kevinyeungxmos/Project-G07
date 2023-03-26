@@ -58,6 +58,7 @@ class LessonListActivity : AppCompatActivity() {
 //            }
 //        }
     }
+
     override fun onStart() {
         super.onStart()
 
@@ -75,32 +76,36 @@ class LessonListActivity : AppCompatActivity() {
         val lvCourse: ListView = findViewById(R.id.lvCourse)
         lvCourse.adapter = listAdapter
 
-        lvCourse.setOnItemClickListener(){adapterView, view, i, l ->
+        lvCourse.setOnItemClickListener() { adapterView, view, i, l ->
             Log.d("LessonList", "$i and $l clicked")
 
-            if(swSequential.isChecked){
+            if (swSequential.isChecked) {
                 prefs.setSeq(swSequential.isChecked)
-                if(courseList[i].isCompleted){
+                if (courseList[i].isCompleted) {
                     val intent = Intent(this, LessonDetailsActivity::class.java)
                     intent.putExtra("TO", i)
                     startActivity(intent)
-                }else{
-                    if(i-1>=0){
-                        if(courseList[i-1].isCompleted){
+                } else {
+                    if (i - 1 >= 0) {
+                        if (courseList[i - 1].isCompleted) {
                             //navigate
                             val intent = Intent(this, LessonDetailsActivity::class.java)
                             intent.putExtra("TO", i)
                             startActivity(intent)
-                        }else{
-                            Toast.makeText(this, "Course ${courseList[i-1].course} not yet completed", Toast.LENGTH_LONG).show()
+                        } else {
+                            Toast.makeText(
+                                this,
+                                "Course ${courseList[i - 1].course} not yet completed",
+                                Toast.LENGTH_LONG
+                            ).show()
                         }
-                    }else{
+                    } else {
                         val intent = Intent(this, LessonDetailsActivity::class.java)
                         intent.putExtra("TO", i)
                         startActivity(intent)
                     }
                 }
-            }else{
+            } else {
                 prefs.setSeq(swSequential.isChecked)
                 val intent = Intent(this, LessonDetailsActivity::class.java)
                 intent.putExtra("TO", i)
