@@ -80,19 +80,25 @@ class LessonListActivity : AppCompatActivity() {
 
             if(swSequential.isChecked){
                 prefs.setSeq(swSequential.isChecked)
-                if(i-1>=0){
-                    if(courseList[i-1].isCompleted){
-                        //navigate
-                        val intent = Intent(this, LessonDetailsActivity::class.java)
-                        intent.putExtra("TO", i)
-                        startActivity(intent)
-                    }else{
-                        Toast.makeText(this, "Course ${courseList[i-1].course} not yet completed", Toast.LENGTH_LONG).show()
-                    }
-                }else{
+                if(courseList[i].isCompleted){
                     val intent = Intent(this, LessonDetailsActivity::class.java)
                     intent.putExtra("TO", i)
                     startActivity(intent)
+                }else{
+                    if(i-1>=0){
+                        if(courseList[i-1].isCompleted){
+                            //navigate
+                            val intent = Intent(this, LessonDetailsActivity::class.java)
+                            intent.putExtra("TO", i)
+                            startActivity(intent)
+                        }else{
+                            Toast.makeText(this, "Course ${courseList[i-1].course} not yet completed", Toast.LENGTH_LONG).show()
+                        }
+                    }else{
+                        val intent = Intent(this, LessonDetailsActivity::class.java)
+                        intent.putExtra("TO", i)
+                        startActivity(intent)
+                    }
                 }
             }else{
                 prefs.setSeq(swSequential.isChecked)

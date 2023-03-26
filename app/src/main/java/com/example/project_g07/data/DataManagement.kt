@@ -122,7 +122,7 @@ class HandlePrefs(val context: Context) {
         dm.name = getName()
         dm.courseList.forEachIndexed { index, course ->
             course.isCompleted = getComplete(index+1)
-            course.description = getNote(index+1)
+            course.note = getNote(index+1)
         }
     }
 
