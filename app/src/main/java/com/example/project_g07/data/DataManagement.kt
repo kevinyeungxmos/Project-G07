@@ -1,8 +1,5 @@
 package com.example.project_g07.data
 
-import android.content.Context
-import android.content.SharedPreferences
-import androidx.appcompat.app.AppCompatActivity
 import com.example.project_g07.model.Course
 
 
@@ -11,9 +8,24 @@ class DataManagement {
     var name: String? = null
     var courseList: List<Course> =
         listOf<Course>(
-            Course("course1", 1, 1.0, "this is course 1"),
-            Course("course2", 2, 1.5, "this is course 2"),
-            Course("course3", 3, 2.5, "this is course 3")
+            Course("Web Development Fundamentals", 1, "1:11:12",
+                "Web Development Fundamentals HTML & CSS video lecture with Codesmith Alum and Former Engineering Mentor Savitri Beaver."
+                    ,"https://youtu.be/2xXt11ziXSM"),
+            Course("Full Stack Development", 2, "9:53:37",
+                "Full stack development is the end-to-end development of applications. It includes both the front end and back end of an application. The front end is usually accessed by a client, and the back end forms the core of the application where all the business logic is applied.",
+                "https://www.youtube.com/watch?v=kjBvQWHk_KI"),
+            Course("Introduction to Kotlin", 3, "2:38:30",
+                "Kotlin is a modern, trending programming language that was released in 2016 by JetBrains. It has become very popular since it is compatible with Java (one of the most popular programming languages out there), which means that Java code (and libraries) can be used in Kotlin programs.",
+                "https://www.youtube.com/watch?v=F9UC9DY-vIU"),
+            Course("Introduction to Android Development", 4, "11:26:37",
+                "In this course, you'll learn the basics of building Android apps with the Kotlin programming language. Along the way, you'll develop a collection of apps to start your journey as an Android developer.",
+                "https://www.youtube.com/watch?v=fis26HvvDII"),
+            Course("Advanced Android Development", 5, "2:19:17",
+                "he Complete Android Developer Course: Build Your Own Android Applications From Beginner To Advanced",
+                "https://www.youtube.com/watch?v=yzS_mJj8lwo"),
+            Course("Mobile Application Strategy", 6, "1:13:45",
+                "Building a Fast and Secure Mobile App Development Strategy - Webinar Replay",
+                "https://www.youtube.com/watch?v=cgR572Ufdfw")
         )
 
     private constructor() {}
@@ -34,96 +46,3 @@ class DataManagement {
 
 }
 
-class HandlePrefs(val context: Context) {
-
-    lateinit var prefs: SharedPreferences
-
-    fun setLogin(isReset: Boolean) {
-        this.prefs = context.getSharedPreferences("MY-PREFS", AppCompatActivity.MODE_PRIVATE)
-        with(this.prefs.edit()) {
-            putBoolean("KEY_LOGIN", isReset)
-            apply()
-        }
-    }
-
-    fun setNote(code: Int, note: String) {
-        this.prefs = context.getSharedPreferences("MY-PREFS", AppCompatActivity.MODE_PRIVATE)
-        with(this.prefs.edit()) {
-            putString("KEY_NOTE_$code", note)
-            apply()
-        }
-    }
-
-    fun setComplete(code: Int, isComplete: Boolean) {
-        this.prefs = context.getSharedPreferences("MY-PREFS", AppCompatActivity.MODE_PRIVATE)
-        with(this.prefs.edit()) {
-            putBoolean("KEY_COMPLETE_$code", isComplete)
-            apply()
-        }
-    }
-
-    fun setSeq(isChecked: Boolean) {
-        this.prefs = context.getSharedPreferences("MY-PREFS", AppCompatActivity.MODE_PRIVATE)
-        with(this.prefs.edit()) {
-            putBoolean("KEY_SEQ", isChecked)
-            apply()
-        }
-    }
-
-    fun setName(name: String) {
-        this.prefs = context.getSharedPreferences("MY-PREFS", AppCompatActivity.MODE_PRIVATE)
-        with(this.prefs.edit()) {
-            putString("KEY_USER", name)
-            apply()
-        }
-    }
-
-    fun getNote(code: Int): String {
-        this.prefs = context.getSharedPreferences("MY-PREFS", AppCompatActivity.MODE_PRIVATE)
-        val s = this.prefs.getString("KEY_NOTE_$code", "EMPTY")
-        return s!!
-    }
-
-    fun getLogin(): Boolean {
-        this.prefs = context.getSharedPreferences("MY-PREFS", AppCompatActivity.MODE_PRIVATE)
-        return prefs.getBoolean("KEY_LOGIN", false)
-    }
-
-    fun getComplete(code: Int): Boolean {
-        this.prefs = context.getSharedPreferences("MY-PREFS", AppCompatActivity.MODE_PRIVATE)
-        return this.prefs.getBoolean("KEY_COMPLETE_$code", false)
-    }
-
-    fun getSEQ(): Boolean {
-        this.prefs = context.getSharedPreferences("MY-PREFS", AppCompatActivity.MODE_PRIVATE)
-        return prefs.getBoolean("KEY_SEQ", false)
-    }
-
-    fun getName(): String? {
-        this.prefs = context.getSharedPreferences("MY-PREFS", AppCompatActivity.MODE_PRIVATE)
-        return prefs.getString("KEY_USER", "N/A")
-    }
-
-    fun initSharedPrefs(newInstance: DataManagement, userName: String) {
-        this.prefs = context.getSharedPreferences("MY-PREFS", AppCompatActivity.MODE_PRIVATE)
-        with(prefs.edit()) {
-            putBoolean("KEY_LOGIN", true)
-            putBoolean("KEY_SEQ", false)
-            putString("KEY_USER", userName)
-            for (i in newInstance.courseList) {
-                putBoolean("KEY_COMPLETE_${i.code}", false)
-                putString("KEY_NOTE_${i.code}", "")
-            }
-            apply()
-        }
-    }
-
-    fun syncPrefsAndDM(dm: DataManagement) {
-        dm.name = getName()
-        dm.courseList.forEachIndexed { index, course ->
-            course.isCompleted = getComplete(index+1)
-            course.note = getNote(index+1)
-        }
-    }
-
-}

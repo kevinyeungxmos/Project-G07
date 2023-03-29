@@ -30,14 +30,22 @@
             android:textSize="24sp"
             android:textStyle="bold" />
 
+<!--        <TextView-->
+<!--            android:id="@+id/tvDetail"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_margin="8dp"-->
+<!--            android:text="TextView"-->
+<!--            android:textSize="18sp"-->
+<!--            android:textStyle="italic"/>-->
         <TextView
-            android:id="@+id/tvDetail"
+            android:id="@+id/tvLength"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:text="TextView"
-            android:textSize="18sp"
-            android:textStyle="italic"/>
+            android:textStyle="italic"
+            android:textSize="18sp"/>
 
     </LinearLayout>
 

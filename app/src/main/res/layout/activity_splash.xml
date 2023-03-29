@@ -32,6 +32,17 @@
         android:textColor="@color/black"
         android:layout_below="@id/imageView"
         android:padding="30dp"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Become a Mobile\nApplication Developer"
+        android:textSize="25dp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:layout_below="@id/imageView"
+        android:padding="30dp"
+        />
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -43,15 +54,13 @@
         android:indeterminateTint="@color/black"
         android:max="100"/>
 
-
-
     <TextView
         android:id="@+id/textView1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/progressBar"
         android:gravity="center"
-        android:layout_marginTop="200dp"
+        android:layout_marginTop="50dp"
         android:padding="15dp"
         android:text="Designed by Cheuk Kwan and Golnaz"
         android:textColor="@color/black"

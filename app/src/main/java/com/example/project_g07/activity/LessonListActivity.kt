@@ -5,6 +5,7 @@ import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.ImageButton
 import android.widget.ListView
 import android.widget.Switch
 import android.widget.Toast
@@ -21,42 +22,11 @@ class LessonListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_lesson_list)
 
-//        val swSequential: Switch = findViewById(R.id.swSeq)
-//        swSequential.isChecked = prefs.getSEQ()
-//
-//        val courseList: List<Course> = DataManagement.getInstance().courseList
-//
-//        listAdapter = ListAdapter(this, courseList)
-//
-//        val lvCourse: ListView = findViewById(R.id.lvCourse)
-//        lvCourse.adapter = listAdapter
-//
-//        lvCourse.setOnItemClickListener(){adapterView, view, i, l ->
-//            Log.d("LessonList", "$i and $l clicked")
-//
-//            if(swSequential.isChecked){
-//                prefs.setSeq(swSequential.isChecked)
-//                if(i-1>=0){
-//                    if(courseList[i].isCompleted){
-//                        //navigate
-//                        val intent = Intent(this, LessonDetailsActivity::class.java)
-//                        intent.putExtra("TO", i)
-//                        startActivity(intent)
-//                    }else{
-//                        Toast.makeText(this, "Course ${courseList[i-1].course} not yet completed", Toast.LENGTH_LONG).show()
-//                    }
-//                }else{
-//                    val intent = Intent(this, LessonDetailsActivity::class.java)
-//                    intent.putExtra("TO", i)
-//                    startActivity(intent)
-//                }
-//            }else{
-//                prefs.setSeq(swSequential.isChecked)
-//                val intent = Intent(this, LessonDetailsActivity::class.java)
-//                intent.putExtra("TO", i)
-//                startActivity(intent)
-//            }
-//        }
+        val btnLL: ImageButton = findViewById(R.id.imageButtonLL)
+
+        btnLL.setOnClickListener{
+            finish()
+        }
     }
 
     override fun onStart() {
@@ -113,4 +83,11 @@ class LessonListActivity : AppCompatActivity() {
             }
         }
     }
+
+    override fun finish() {
+        val intent = Intent(this, WelcomeBackActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+        startActivity(intent)
+    }
+
 }

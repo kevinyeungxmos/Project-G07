@@ -20,13 +20,15 @@ class ListAdapter (context: Context, list: List<Course>) :
 
         val code = view.findViewById<TextView>(R.id.tvCode)
         val name = view.findViewById<TextView>(R.id.tvName)
-        val detail = view.findViewById<TextView>(R.id.tvDetail)
+        //val detail = view.findViewById<TextView>(R.id.tvDetail)
+        val tvLength = view.findViewById<TextView>(R.id.tvLength)
         val completeImage = view.findViewById<ImageView>(R.id.imgComplete)
         val c = getItem(position)
         c?.let {
             code.text = it.code.toString()
             name.text = it.course
-            detail.text = it.description
+            //detail.text = it.description
+            tvLength.text = "length: ${it.length}"
             val img = if(it.isCompleted) R.drawable.baseline_star_24 else R.drawable.baseline_star_outline_24
             completeImage.setImageResource(img)
         }
